@@ -25,7 +25,7 @@
         }
 
         html {
-            background: var(--background-color);
+            background: #FFFFFF;
             height: 100%;
         }
 
@@ -52,12 +52,12 @@
         }
 
         .wrapper {
-            background: var(--wrapper-background);
+            background: #F5F5F5;
             width: 90%;
             max-width: 400px;
             padding: 20px;
             border-radius: 10px;
-            color: var(--text-color);
+            color: #000000;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
@@ -106,18 +106,13 @@
 
         h4, p {
             margin: 10px 0;
-            color: var(--text-secondary-color);
+            color: #507392;
         }
 
         .footer {
             margin-top: 20px;
             font-size: 12px;
-            color: var(--text-secondary-color);
-        }
-
-        .theme-toggle {
-            margin-top: 15px;
-            cursor: pointer;
+            color: #507392;
         }
 
         @media screen and (min-width: 768px) {
@@ -130,7 +125,7 @@
             text-align: center;
             margin-top: 20px;
             font-size: 12px;
-            color: var(--text-secondary-color);
+            color: #507392;
         }
     </style>
 </head>
@@ -147,50 +142,12 @@
             <li><i class="fa fa-check"></i> Total Votes To Win: 9</li>
             <li><a href="#" style="text-decoration: none; color: #6f808a;"><i class="fa fa-flag"></i> Help</a></li>
         </ul>
-        <div class="theme-toggle" onclick="toggleTheme()">
-            <img src="dark-light-mode-icon.png" alt="Toggle Theme" width="30px" height="30px">
-        </div>
     </div>
     <div class="credits">
         Powered by Meta @2024
     </div>
 
     <script>
-        const root = document.documentElement;
-
-        const darkTheme = {
-            '--background-color': '#121212',
-            '--wrapper-background': '#1E1E1E',
-            '--text-color': '#FFFFFF',
-            '--text-secondary-color': '#507392'
-        };
-
-        const lightTheme = {
-            '--background-color': '#FFFFFF',
-            '--wrapper-background': '#F5F5F5',
-            '--text-color': '#000000',
-            '--text-secondary-color': '#507392'
-        };
-
-        function setTheme(theme) {
-            for (let [variable, value] of Object.entries(theme)) {
-                root.style.setProperty(variable, value);
-            }
-        }
-
-        function toggleTheme() {
-            const currentBackgroundColor = getComputedStyle(root).getPropertyValue('--background-color').trim();
-            if (currentBackgroundColor === '#121212') {
-                setTheme(lightTheme);
-            } else {
-                setTheme(darkTheme);
-            }
-        }
-
-        // Set the initial theme
-        setTheme(darkTheme);
-
-        // Notification logic
         const notification = document.getElementById('notification');
         const usernames = ["Arjun", "Aarav", "Vihaan", "Vivaan", "Aditya", "Krishna", "Ishaan", "Shaurya", "Ayaan", "Dhruv"];
         let usedUsernames = [];
@@ -206,10 +163,10 @@
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 1000); // Hide after 1 second
+            }, 2000); // Hide after 2 seconds
         }
 
-        setInterval(showNotification, 2000); // Show notification every 2 seconds
+        setInterval(showNotification, 4000); // Show notification every 4 seconds
     </script>
 </body>
 </html>
