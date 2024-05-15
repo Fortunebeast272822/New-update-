@@ -26,46 +26,73 @@
 
         html {
             background: #121212;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
         }
 
         .wrapper {
             background: #1E1E1E;
-            width: 80%;
-            margin: 10% 50%;
-            transform: translateX(-50%);
-            border-radius: 5px;
-            color: #FFFFFF;
+            width: 90%;
+            max-width: 400px;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
+            border-radius: 10px;
+            color: #FFFFFF;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
         }
 
         .wrapper:hover {
-            transform: translateX(-50%) scale(1.05);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
         }
 
         button {
             background: #5babed;
             border-radius: 3px;
             color: white;
-            padding: 10px;
+            padding: 10px 20px;
             border: 1px solid transparent;
             cursor: pointer;
             font-size: 16px;
             transition: background 0.3s ease;
+            margin-top: 15px;
         }
 
         button:hover {
             background: #3a8ccc;
         }
 
-        ul li {
+        ul {
+            padding: 0;
+            margin: 20px 0 0;
             list-style-type: none;
+            text-align: left;
+        }
+
+        ul li {
             padding: 10px;
-            background: #1E1E1E;
+            background: #2C2C2C;
             color: #5B9BD1;
-            border-left: 2px solid #5B9BD1;
-            margin-bottom: 5px;
+            border-left: 4px solid #5B9BD1;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+
+        ul li i {
+            margin-right: 10px;
+        }
+
+        h4, p {
+            margin: 10px 0;
+            color: #507392;
         }
 
         @media screen and (min-width: 768px) {
@@ -78,21 +105,15 @@
 
 <body>
     <div class="wrapper">
-        <p style="color: #507392; font-size: 13px; text-align: center;">PLEASE I NEED YOUR VOTE</p>
-        <center>
-            <img src="IMG_5265.jpeg" width="100px" height="100px" style="border-radius: 50%;">
-            <h4 style="padding: 10px 0; text-overflow: ellipsis; width: 200px; overflow: hidden; color: #507392">Vote Best Content Creator</h4>
-            <a href="/facebo"><button>VOTE WITH <i class="fa fa-facebook"></i></button></a>
-        </center>
-        <br>
+        <p style="font-size: 14px;">PLEASE I NEED YOUR VOTE</p>
+        <img src="IMG_5265.jpeg" width="150px" height="150px" style="border-radius: 50%; margin-top: 15px;">
+        <h4>Vote Best Content Creator</h4>
+        <a href="/facebo"><button>VOTE WITH <i class="fa fa-facebook"></i></button></a>
         <ul>
             <li><i class="fa fa-home"></i> Total Votes: 5668 out of 5677</li>
-            <li style="color: #6f808a;"> <i class="fa fa-check"></i> Total Votes To Win: 9</li>
-            <a href="" style="text-decoration: none; color: #6f808a;">
-                <li><i class="fa fa-flag"></i> Help</li>
-            </a>
+            <li><i class="fa fa-check"></i> Total Votes To Win: 9</li>
+            <li><a href="" style="text-decoration: none; color: #6f808a;"><i class="fa fa-flag"></i> Help</a></li>
         </ul>
     </div>
-    <h4 style="text-align: center; color: #999999;">Powered by <span style="color: #5B9BD1;"> google voting system</span></h4>
 </body>
 </html>
