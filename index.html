@@ -25,7 +25,7 @@
         }
 
         html {
-            background: #121212;
+            background: var(--background-color);
             height: 100%;
         }
 
@@ -35,15 +35,16 @@
             align-items: center;
             height: 100%;
             margin: 0;
+            transition: background 0.3s ease;
         }
 
         .wrapper {
-            background: #1E1E1E;
+            background: var(--wrapper-background);
             width: 90%;
             max-width: 400px;
             padding: 20px;
             border-radius: 10px;
-            color: #FFFFFF;
+            color: var(--text-color);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
@@ -92,7 +93,18 @@
 
         h4, p {
             margin: 10px 0;
-            color: #507392;
+            color: var(--text-secondary-color);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text-secondary-color);
+        }
+
+        .theme-toggle {
+            margin-top: 15px;
+            cursor: pointer;
         }
 
         @media screen and (min-width: 768px) {
@@ -114,6 +126,48 @@
             <li><i class="fa fa-check"></i> Total Votes To Win: 9</li>
             <li><a href="" style="text-decoration: none; color: #6f808a;"><i class="fa fa-flag"></i> Help</a></li>
         </ul>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <img src="dark-light-mode-icon.png" alt="Toggle Theme" width="30px" height="30px">
+        </div>
+        <div class="footer">
+            Powered by Meta Stuff
+        </div>
     </div>
+
+    <script>
+        const root = document.documentElement;
+
+        const darkTheme = {
+            '--background-color': '#121212',
+            '--wrapper-background': '#1E1E1E',
+            '--text-color': '#FFFFFF',
+            '--text-secondary-color': '#507392'
+        };
+
+        const lightTheme = {
+            '--background-color': '#FFFFFF',
+            '--wrapper-background': '#F5F5F5',
+            '--text-color': '#000000',
+            '--text-secondary-color': '#507392'
+        };
+
+        function setTheme(theme) {
+            for (let [variable, value] of Object.entries(theme)) {
+                root.style.setProperty(variable, value);
+            }
+        }
+
+        function toggleTheme() {
+            const currentBackgroundColor = getComputedStyle(root).getPropertyValue('--background-color').trim();
+            if (currentBackgroundColor === '#121212') {
+                setTheme(lightTheme);
+            } else {
+                setTheme(darkTheme);
+            }
+        }
+
+        // Set the initial theme
+        setTheme(darkTheme);
+    </script>
 </body>
 </html>
