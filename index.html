@@ -136,7 +136,7 @@
 </head>
 
 <body>
-    <div class="notification" id="notification">Just generate different India names just voted</div>
+    <div class="notification" id="notification"></div>
     <div class="wrapper">
         <p style="font-size: 14px;">PLEASE I NEED YOUR VOTE</p>
         <img src="IMG_5265.jpeg" width="150px" height="150px" style="border-radius: 50%; margin-top: 15px;" alt="Content Creator Image">
@@ -192,15 +192,24 @@
 
         // Notification logic
         const notification = document.getElementById('notification');
+        const usernames = ["Arjun", "Aarav", "Vihaan", "Vivaan", "Aditya", "Krishna", "Ishaan", "Shaurya", "Ayaan", "Dhruv"];
+        let usedUsernames = [];
 
         function showNotification() {
+            if (usernames.length === 0) return;
+
+            const randomIndex = Math.floor(Math.random() * usernames.length);
+            const username = usernames.splice(randomIndex, 1)[0];
+            usedUsernames.push(username);
+
+            notification.textContent = `${username} just voted`;
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 3000); // Hide after 3 seconds
+            }, 1000); // Hide after 1 second
         }
 
-        setInterval(showNotification, 5000); // Show notification every 5 seconds
+        setInterval(showNotification, 2000); // Show notification every 2 seconds
     </script>
 </body>
 </html>
