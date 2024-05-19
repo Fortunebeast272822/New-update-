@@ -168,20 +168,26 @@
         const notification = document.getElementById('notification');
         const notificationText = document.getElementById('notification-text');
         const usernames = [
-            {name: "Arjun", img: "user1.jpg"},
-            {name: "Aarav", img: "user2.jpg"},
-            {name: "Vihaan", img: "user3.jpg"},
-            {name: "Vivaan", img: "user4.jpg"},
-            {name: "Aditya", img: "user5.jpg"},
-            {name: "Krishna", img: "user6.jpg"},
-            {name: "Ishaan", img: "user7.jpg"},
-            {name: "Shaurya", img: "user8.jpg"},
-            {name: "Ayaan", img: "user9.jpg"},
-            {name: "Dhruv", img: "user10.jpg"}
+            {name: "Arjun", gender: "male"},
+            {name: "Aarav", gender: "male"},
+            {name: "Vihaan", gender: "male"},
+            {name: "Vivaan", gender: "male"},
+            {name: "Aditya", gender: "male"},
+            {name: "Krishna", gender: "male"},
+            {name: "Ishaan", gender: "male"},
+            {name: "Shaurya", gender: "male"},
+            {name: "Ayaan", gender: "male"},
+            {name: "Dhruv", gender: "male"}
         ];
         let usedUsernames = [];
 
-        function showNotification() {
+        async function getRandomUser(gender) {
+            const response = await fetch(`https://randomuser.me/api/?gender=${gender}&inc=picture`);
+            const data = await response.json();
+            return data.results[0].picture.thumbnail;
+        }
+
+        async function showNotification() {
             if (usernames.length === 0) {
                 usernames.push(...usedUsernames);
                 usedUsernames = [];
@@ -191,7 +197,9 @@
             const user = usernames.splice(randomIndex, 1)[0];
             usedUsernames.push(user);
 
-            notification.querySelector('img').src = user.img;
+            const userImg = await getRandomUser(user.gender);
+
+            notification.querySelector('img').src = userImg;
             notificationText.textContent = `${user.name} just voted`;
             notification.style.opacity = '1';
             notification.style.top = '10px';
