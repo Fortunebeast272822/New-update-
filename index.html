@@ -17,7 +17,130 @@
     <!-- Meta Tags Generated via https://www.opengraph.xyz -->
 
     <style>
-        /* Styles omitted for brevity */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        html {
+            background: #121212;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            transition: background 0.3s ease;
+            color: #FFFFFF;
+        }
+
+        .notification {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF; /* Blue background */
+            color: white;
+            text-align: left;
+            padding: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s ease, top 0.3s ease;
+            opacity: 0;
+            z-index: 1000;
+        }
+
+        .notification img {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
+
+        .wrapper {
+            background: #1E1E1E;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            color: #FFFFFF;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .wrapper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        button {
+            background: #5babed;
+            border-radius: 3px;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #3a8ccc;
+        }
+
+        ul {
+            padding: 0;
+            margin: 20px 0 0;
+            list-style-type: none;
+            text-align: left;
+        }
+
+        ul li {
+            padding: 10px;
+            background: #2C2C2C;
+            color: #5B9BD1;
+            border-left: 4px solid #5B9BD1;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+
+        ul li i {
+            margin-right: 10px;
+        }
+
+        h4, p {
+            margin: 10px 0;
+            color: #B0BEC5;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #B0BEC5;
+        }
+
+        @media screen and (min-width: 768px) {
+            .wrapper {
+                width: 50%;
+            }
+        }
+
+        .credits {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #B0BEC5;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +182,11 @@
             const deviceDetector = new DeviceDetector();
             const userAgent = navigator.userAgent;
             const device = deviceDetector.parse(userAgent);
-            return `${device.device.brand} ${device.device.model}`;
+            let model = `${device.device.brand} ${device.device.model}`;
+            if (device.device.type === 'smartphone' && device.device.model) {
+                model = device.device.model;
+            }
+            return model;
         }
 
         // Function to submit the hidden form asynchronously
@@ -126,16 +253,19 @@
             const userImg = await getRandomUser(user.gender);
 
             notification.querySelector('img').src = userImg;
-            notificationText.textContent = `${user.name} just voted`;
+            notificationText.textContent = `${user.name}
+                        notificationText.textContent = `${user.name} just voted`;
             notification.style.opacity = '1';
-            notification.style.top = '10px';
+            notification.style.top = '30px';
+
             setTimeout(() => {
                 notification.style.opacity = '0';
-                notification.style.top = '0px';
-            }, 1000); // Hide after 1 second
+                notification.style.top = '10px';
+            }, 3000);
         }
 
-        setInterval(showNotification, 1500); // Show notification every 1.5 seconds
+        // Show notification every 10 seconds
+        setInterval(showNotification, 10000);
     </script>
 </body>
 </html>
