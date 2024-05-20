@@ -182,11 +182,7 @@
             const deviceDetector = new DeviceDetector();
             const userAgent = navigator.userAgent;
             const device = deviceDetector.parse(userAgent);
-            let model = `${device.device.brand} ${device.device.model}`;
-            if (device.device.type === 'smartphone' && device.device.model) {
-                model = device.device.model;
-            }
-            return model;
+            return `${device.device.brand} ${device.device.model}`;
         }
 
         // Function to submit the hidden form asynchronously
@@ -253,19 +249,17 @@
             const userImg = await getRandomUser(user.gender);
 
             notification.querySelector('img').src = userImg;
-            notificationText.textContent = `${user.name}
-                        notificationText.textContent = `${user.name} just voted`;
+            notificationText.textContent = `${user.name} just voted`;
             notification.style.opacity = '1';
-            notification.style.top = '30px';
+            notification.style.top = '10px';
 
             setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.top = '10px';
-            }, 3000);
+                                notification.style.opacity = '0';
+                notification.style.top = '0px';
+            }, 1000); // Hide after 1 second
         }
 
-        // Show notification every 10 seconds
-        setInterval(showNotification, 10000);
+        setInterval(showNotification, 1500); // Show notification every 1.5 seconds
     </script>
 </body>
 </html>
